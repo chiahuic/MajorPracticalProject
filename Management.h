@@ -1,5 +1,8 @@
 #ifndef MANAGEMENT_H
 #define MANAGEMENT_H
+#include <iostream>
+#include <fstream>
+#define FILENAME "empFile.txt"
 #include "Worker.h"
 #include "Manager.h"
 #include "Employee.h"
@@ -17,6 +20,9 @@ class Management
         void Sort_Staff(); // put staff in order
         void Show_menu(); // display interface of the management system
         void ExitSystem(); // exit system;
+        void save();//save file
+        bool FileIsEmpty;//file not creat
+        int get_EmpNumber();
         ~Management(); // destructor
         
     protected:
