@@ -1,9 +1,9 @@
 #ifndef EMPLOYEE_H
 #define EMPLOYEE_H
 
-#include "Worker.h"
+#include "Person.h"
 // general employee class
-class Employee: public Worker 
+class Employee: public Person 
 {   
     public: 
         Employee(int id, std::string name, int age);
