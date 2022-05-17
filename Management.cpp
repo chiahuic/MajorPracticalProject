@@ -149,7 +149,7 @@ void Management::Search_Staff() {
   if (select == 1) {
     int id;
     std::cout << "Please enter the employee number you are looking for: " << std::endl;
-    std::cin >> select;
+    std::cin >> id;
     int search1 = IsExist1(id);
     if (search1 != -1) {
       std::cout << "The search is successful. The employee information is as follows: " << std::endl;
