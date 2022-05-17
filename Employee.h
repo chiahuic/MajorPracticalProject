@@ -12,4 +12,4 @@ class Employee: public Worker
         
 };
 
-#endif
+#endif //EMPLOYEE_H
