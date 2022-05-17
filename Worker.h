@@ -13,6 +13,7 @@ class Worker
         int _ID; // individual numbers of workers
         std::string _Name; // name of workers
         int _Age; // age of workers    
+    
+~Worker();
 };
-
-#endif
+#endif //WORKER_H
