@@ -2,7 +2,7 @@
 #define MANAGEMENT_H
 #include "Employee.h"
 #include "Manager.h"
-#include "Worker.h"
+#include "Person.h"
 
 class Management {
  public:
@@ -21,7 +21,7 @@ class Management {
 
  protected:
   int Emp_number;      // record the current number of system
-  Worker** _EmpArray;  // secondary pointer to record all employee data
+  Person** _EmpArray;  // secondary pointer to record all employee data
 };
 
 #endif
