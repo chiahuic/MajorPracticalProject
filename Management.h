@@ -29,6 +29,5 @@ class Management
         int Emp_number; // record the current number of system
         Worker** _EmpArray; // secondary pointer to record all employee data
 
-~Management();
 };
 #endif //MANAGEMENT_H
