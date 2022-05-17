@@ -122,8 +122,8 @@ void Management::Delete_Staff() {
   int index = this->IsExist1(id);
   if (index != -1) { // it means the staff exist, and need delete
     for (int i = index; i < Emp_number-1;i++) {
-      this->_EmpArray[i] = this->_EmpArray[i+1];
       std::cout << "Delete successfully" << std::endl;
+      this->_EmpArray[i] = this->_EmpArray[i+1];
     }
     this->Emp_number--; // number of staff decrease
   }
