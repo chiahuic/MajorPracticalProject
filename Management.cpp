@@ -177,6 +177,8 @@ int Management::get_EmpNumber(){
     while(ifs >> ID && ifs >> NAME && ifs >> AGE){
         num++;
     }
+    ifs.close();
+    return num;
 
 }
 
@@ -274,7 +276,7 @@ void Management::Modify_Staff(){
 
 void Management::Search_Staff(){
     if(this->FileIsEmpty){
-        cout<<"file not exit"<<cout;
+        cout<<"file not exit"<<endl;
     }else{
         cout<<"Enter lookup:"<<endl;
         cout<<"1. ID"<<endl;
@@ -300,16 +302,16 @@ void Management::Search_Staff(){
             cout<<"Enter name:"<<endl;
             cin >> name;
 
-            bool falg = false;
+            bool flag = false;
             for(int i = 0; i <Emp_number; i++){
-                if(_EmpArray[i]->getDepartName() == name){
-                    cout<<"The information is:"<<_EmpArray[i]->showInformation()<<endl;
-                    falg = true;
+                if(_EmpArray[i]->_Name == name){
+                    cout<<"The ID is:"<<_EmpArray[i]->_ID<<"The information is:"<<endl;
+                    flag = true;
                     this->_EmpArray[i]->showInformation();
                 }
             }
-            if(falg == false){
-                cout<<"no found"<<end;
+            if(flag == false){
+                cout<<"no found"<<endl;
             }
         }
         else{
