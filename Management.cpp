@@ -21,7 +21,7 @@ void Management::Add_Staff() {
     int new_Size =
         this->Emp_number + addNum;  // The number of existing employees plus the
                                     // number of new employees
-    Worker** new_Space = new Worker*[new_Size];  // Open up new space
+    Person** new_Space = new Person*[new_Size];  // Open up new space
     if (this->_EmpArray !=
         NULL)  // if the data of the original pointer is not null
     {
@@ -65,7 +65,7 @@ void Management::Add_Staff() {
         std::cout << "Invalid number, choose 1 or 2 please" << std::endl;
         std::cin >> Select;
       }
-      Worker* staff = NULL;
+      Person* staff = NULL;
       switch (Select) {
         case 1:
           staff = new Employee(ID, NAME, AGE);
@@ -150,10 +150,10 @@ void Management::Search_Staff() {
     int id;
     std::cout << "Please enter the employee number you are looking for: " << std::endl;
     std::cin >> select;
-    int search = IsExist1(id);
-    if (search != -1) {
+    int search1 = IsExist1(id);
+    if (search1 != -1) {
       std::cout << "The search is successful. The employee information is as follows: " << std::endl;
-      this->_EmpArray[search]->showInformation();
+      this->_EmpArray[search1]->showInformation();
     }
     else {
       std::cout << "Failed to search for this staff's information" << std::endl; 
@@ -163,10 +163,10 @@ void Management::Search_Staff() {
     std::string name;
     std::cout << "Please enter the name of the staff you want to find" << std::endl;
     std::cin >> name;
-    bool search = IsExist2(name);
-    if (search == true) {
+    bool search2 = IsExist2(name);
+    if (search2 == true) {
       std::cout << "The search is successful. The employee information is as follows: " << std::endl;
-      this->_EmpArray[search]->showInformation();
+      this->_EmpArray[search2]->showInformation();
     }
     else {
       std::cout << "Failed to search for this staff's information" << std::endl; 
