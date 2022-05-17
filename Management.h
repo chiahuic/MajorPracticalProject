@@ -10,7 +10,7 @@ class Management {
   void Add_Staff();      // add new staff
   void Display_Staff();  // display the information of staff
   int IsExist1(int id);   // Determine whether staffs exist by checking staff id
-  bool Management::IsExist2(std::string name); // Determine whether staffs exist by checking staff name
+  bool IsExist2(std::string name); // Determine whether staffs exist by checking staff name
   void Delete_Staff();   // delete staff by seaching number
   void Modify_Staff();   // modify the information of staff by searching number
   void Search_Staff();   // check the information of staff by searching number
