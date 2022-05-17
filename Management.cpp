@@ -1,5 +1,4 @@
 #include <iostream>
-
 #include "Management.h"
 using namespace std;
 
@@ -7,8 +6,6 @@ using namespace std;
 Management::Management() 
 {
     ifstream ifs;
-    char ex;
-    ifs >> ex;
     ifs.open(FILENAME, ios::in);//read file
     //if file not exit
     if(!ifs.is_open()){
@@ -16,20 +13,22 @@ Management::Management()
         this->Emp_number = 0;
         this->_EmpArray = NULL;
         this->FileIsEmpty = true;
-        ifs.close():
+        ifs.close();
         return;
     }
     //have file but no data
-    if(ifs.eof(){
+    char ex;
+    ifs >> ex;
+    if(ifs.eof()){
         cout<<"File is empty!"<<endl;
         this->Emp_number = 0;
         this->_EmpArray = NULL;
         this->FileIsEmpty = true;
-        ifs.close():
+        ifs.close();
         return;
     }
     //have file and data
-    int num = this->get_EmpNumber():
+    int num = this->get_EmpNumber();
     cout<<"Number of worker is:"<<num<<endl;
     this->Emp_number = num;
 }
@@ -168,7 +167,7 @@ void Management::Show_menu()
 
 }
 
-int Managment::get_EmpNumber(){
+int Management::get_EmpNumber(){
     ifstream ifs;
     ifs.open(FILENAME, ios::in);//read file
     int ID;
@@ -192,7 +191,7 @@ void Management::save(){
     ofs.close();
 }
 
-int Managment::IsExist(int id){
+int Management::IsExist(int id){
     int index = -1;
     for(int i = 0; i <this->Emp_number; i++){
         if(this->_EmpArray[i]->_ID == id){
@@ -203,7 +202,7 @@ int Managment::IsExist(int id){
     return index;
 }
 
-void Managment::Delete_Staff(){
+void Management::Delete_Staff(){
     if(this->FileIsEmpty){
         cout<<"File not exit"<<endl;
     }
@@ -233,7 +232,7 @@ void Management::Modify_Staff(){
     }else{
         cout<<"enter modify id:"<<endl;
         int id;
-        sdt::cin >> id;
+        cin >> id;
         int ret = this->IsExist(id);
         if(ret != -1){
             delete this->_EmpArray[ret];
@@ -303,10 +302,10 @@ void Management::Search_Staff(){
 
             bool falg = false;
             for(int i = 0; i <Emp_number; i++){
-                if(_EmpArray[i]->getDepartName == name){
+                if(_EmpArray[i]->getDepartName() == name){
                     cout<<"The information is:"<<_EmpArray[i]->showInformation()<<endl;
-                    flag = true;
-                    this->_EmpArray[i]->showInformation;
+                    falg = true;
+                    this->_EmpArray[i]->showInformation();
                 }
             }
             if(falg == false){
