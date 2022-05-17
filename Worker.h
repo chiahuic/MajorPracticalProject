@@ -14,6 +14,6 @@ class Worker
         std::string _Name; // name of workers
         int _Age; // age of workers    
     
-~Worker();
 };
+
 #endif //WORKER_H
