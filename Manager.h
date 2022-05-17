@@ -11,7 +11,6 @@ class Manager: public Worker
         virtual std::string getDepartName() override; // show job title
         virtual void showInformation() override; // display the information of manager
 
-~Manager();
 };
 
 #endif // MANAGER_H
