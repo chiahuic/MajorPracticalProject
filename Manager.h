@@ -1,10 +1,10 @@
 #ifndef MANAGER_H
 #define MANAGER_H
 
-#include "Worker.h"
+#include "Person.h"
 
 // Management personnel class
-class Manager: public Worker 
+class Manager: public Person 
 {
     public:
         Manager(int id, std::string name, int age); // constructor with three basic parameters
