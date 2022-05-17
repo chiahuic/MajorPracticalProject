@@ -10,7 +10,8 @@ class Manager: public Worker
         Manager(int id, std::string name, int age); // constructor with three basic parameters
         virtual std::string getDepartName() override; // show job title
         virtual void showInformation() override; // display the information of manager
-        
+
+~Manager();
 };
 
-#endif
+#endif // MANAGER_H
