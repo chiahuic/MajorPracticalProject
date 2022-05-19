@@ -16,6 +16,7 @@ class Management {
   void Search_Staff();   // check the information of staff by searching number
   void Sort_Staff();     // put staff in order
   void Show_menu();      // display interface of the management system
+  void Run_System();     // After the user enters the options, the interface for each function is displayed
   void ExitSystem();     // exit system;
   ~Management();         // destructor
 
