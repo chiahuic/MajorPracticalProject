@@ -1,5 +1,8 @@
-output: Employee.o Manager.o Management.o main.o
-	g++ Employee.o Manager.o Management.o main.o -o main.exe
+output: Person.o Employee.o Manager.o Management.o main.o
+	g++ Person.o Employee.o Manager.o Management.o main.o -o main.exe
+
+Person.o: Person.cpp
+	g++ -c Person.cpp
 
 Employee.o: Employee.cpp
 	g++ -c Employee.cpp
