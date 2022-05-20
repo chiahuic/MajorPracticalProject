@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "Person.h"
 #include "Employee.h"
 #include "Management.h"
 #include "Manager.h"
