@@ -6,12 +6,70 @@
 #include <iostream>
 
 Management::Management() {
-  this->_StaffNumber = 0;    // initialized to zero
-  this->_StaffArray = NULL;  // empty array
+  // 1. Does the file appear?
+  std::ifstream ifs;
+  ifs.open(FILENAME,std::ios::in);
+  if (!ifs.is_open()) {
+    // std::cout << "====================================" << std::endl;
+    // std::cout << "There are no current files" << std::endl;
+    // std::cout << "====================================" << std::endl;
+    this->_StaffNumber = 0;    // initialized to zero
+    this->_StaffArray = NULL;  // empty array
+    this->FileisEmpty = true;
+    ifs.close();
+    return;
+  }
+  // Does the file is empty?
+  char ch;
+  ifs >> ch;
+  if (ifs.eof()) {
+    // std::cout << "====================================" << std::endl;
+    // std::cout << "It is empty" << std::endl;
+    // std::cout << "====================================" << std::endl;
+    this->_StaffNumber = 0;    // initialized to zero
+    this->_StaffArray = NULL;  // empty array
+    this->FileisEmpty = true;
+    ifs.close();
+    return;
+  }
+  // Does the file have data?
+  int Num = this->Staff_number();
+  std::cout << "the number of staff is: " << Num << std::endl;
+  this->_StaffNumber = Num;
+  this->_StaffArray = new Person*[this->_StaffNumber];
+  this->init_Staff();
+
 }
+
+int Management::Staff_number() {
+  std::ifstream ifs;
+  ifs.open(FILENAME, std::ios::in);
+  int Id;
+  std::string Name;
+  int Age;
+  int D_id;
+  int Num = 0;
+
+  while (ifs >> Id && ifs >> Name && ifs >> Age && ifs >> D_id) {
+    Num++;
+  }
+  return Num;
+}
+
+
 
 void Management::ExitSystem() {
   std::cout << "Welcome to use system again" << std::endl;
+}
+void Management::Save_information() {
+  std::ofstream ofs;
+  ofs.open(FILENAME,std::ios::out);
+  for (int i = 0; i < this->_StaffNumber;i++) {
+    ofs << this->_StaffArray[i]->_Id << " "
+        << this->_StaffArray[i]->_Name << " "
+        << this->_StaffArray[i]->_Age << " "
+        << this->_StaffArray[i]->_DepartmentID << std::endl;
+  }
 }
 void Management::Add_Staff() {
   std::cout << "Please enter the number of staffs you want to add: "
@@ -98,10 +156,10 @@ void Management::Add_Staff() {
     Person* staff = NULL;
     switch (Select) {
       case 1:
-        staff = new Employee(ID, NAME, AGE);
+        staff = new Employee(ID, NAME, AGE,1);
         break;
       case 2:
-        staff = new Manager(ID, NAME, AGE);
+        staff = new Manager(ID, NAME, AGE,2);
         break;
       default:
         std::cout << "Error choosen" << std::endl;
@@ -114,20 +172,24 @@ void Management::Add_Staff() {
   this->_StaffArray = new_Space;  // update a new array
   this->_StaffNumber = new_Size;  // update the current number of staffs
   std::cout << "Add successful" << std::endl;
+  this->FileisEmpty = false;
+  this->Save_information();
 }
 
 void Management::Display_Staff() {
-  std::cout << "====================================" << std::endl;
-  if (_StaffArray != NULL) {
+  if (this->FileisEmpty) {
+    std::cout << "The file does not exist or there are no staffs in it." << std::endl;
+  }
+  else {
+    std::cout << "====================================" << std::endl;
     for (int i = 0; i < this->_StaffNumber; i++) {
+      
       // std::cout << _EmpArray[i]->showInformation() << std::endl;
       this->_StaffArray[i]->showInformation();
     }
     std::cout << "====================================" << std::endl;
-  } else {
-    std::cout << "There are no any current staffs in the system" << std::endl;
-    std::cout << "====================================" << std::endl;
   }
+ 
 }
 
 int Management::IsExist1(int id) {
@@ -150,7 +212,11 @@ bool Management::IsExist2(std::string name) {
   return false;
 }
 void Management::Delete_Staff() {
-  std::cout << "Please enter the number of the staff you want to delete: "
+  if (this->FileisEmpty) {
+    std::cout << "The file does not exist or there are no staffs in it." << std::endl;
+  }
+  else {
+    std::cout << "Please enter the number of the staff you want to delete: "
             << std::endl;
   int id = 0;
   std::cin >> id;
@@ -166,13 +232,22 @@ void Management::Delete_Staff() {
     this->_StaffNumber--;  // number of staff decrease
     delete[] this->_StaffArray;
     this->_StaffArray = new_persons;
-  } else {
-    std::cout << "Deletion failed, the staff could not be found." << std::endl;
+    this->Save_information();
+   }
+   else {
+     std::cout << "Failed to delete. Maybe you misremembered the information." << std::endl;
+   }
   }
+   
 }
 
 void Management::Modify_Staff() {
-  std::cout
+  if (this->FileisEmpty) {
+    std::cout << "The file does not exist or there are no staffs in it." << std::endl;
+  }
+
+  else {
+     std::cout
       << "Please enter the staff number of the employee whose information you "
          "want to modify: "
       << std::endl;
@@ -201,10 +276,10 @@ void Management::Modify_Staff() {
     Person* person = NULL;
     switch (new_select) {
       case 1:
-        person = new Employee(new_id, new_name, new_age);
+        person = new Employee(new_id, new_name, new_age,1);
         break;
       case 2:
-        person = new Manager(new_id, new_name, new_age);
+        person = new Manager(new_id, new_name, new_age,2);
         break;
       default:
         std::cout << "Error choosen" << std::endl;
@@ -213,11 +288,15 @@ void Management::Modify_Staff() {
     // update new data
     this->_StaffArray[modify] = person;
     std::cout << "The information has been modified successfully." << std::endl;
-
-  } else {
+    this->Save_information();
+  }
+ 
+   else {
     std::cout << "Failed to find staff who have staff number " << id
               << std::endl;
   }
+}
+
 }
 
 void Management::Search_Staff() {
@@ -271,8 +350,9 @@ void Management::Sort_Staff() {
         _StaffArray[i] = _StaffArray[min_max];
         _StaffArray[min_max] = temp;
       }
-      std::cout << "Sorting success" << std::endl;
     }
+    std::cout << "Sorting success" << std::endl;
+    this->Save_information();
   } else {
     std::cout << "Don't need to arrange" << std::endl;
   }
@@ -347,6 +427,32 @@ void Management::Run_System() {
     }
   }
 }
+
+void Management::init_Staff() {
+  std::ifstream ifs;
+  ifs.open(FILENAME,std::ios::in);
+  int id;
+  std::string name;
+  int age;
+  int D_id;
+  int index = 0;
+  while (ifs >> id && ifs >> name && ifs >> age &&ifs >> D_id) {
+    Person* original_person = NULL;
+    if (D_id == 1) {
+      original_person = new Employee(id,name,age,D_id);
+    }
+    else if(D_id == 2) {
+      original_person = new Manager(id,name,age,D_id);
+    }
+    else {
+      std::cout << "The employee does not belong to any known position" << std::endl;
+    }
+    this->_StaffArray[index] = original_person;
+    index++;
+  }
+  ifs.close();
+}
+
 Management::~Management() {
   if (this->_StaffArray != NULL) {
     delete[] this->_StaffArray;
