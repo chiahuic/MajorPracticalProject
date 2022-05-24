@@ -11,6 +11,8 @@ class Person {
  int _Id;                                  // individual numbers of persons
  std::string _Name;                        // name of persons
  int _Age;                                 // Age of persons
+ int _DepartmentID;                        // department of id for each staffs
 };
 
 #endif
+
