@@ -1,0 +1,127 @@
+Test Cases for "Add the employee information" function
+Test Description: The newly added employee information will be successfully added and displayed. 
+
+Steps to be Executed: 1. Choose number 1 as next step
+                      2. Enter number of staffs to add
+                      3. Enter the staff number for the specific staff 
+                      4. Enter the name
+                      5. Enter the age
+                      6. Choose the job title - 1.Employee/2.Manager
+                      7. The staff information will be displayed
+
+Number of Staff   Staff Number            Name             Age     Job Title      Test Results
+        1           1234            Joseph Shakespeare     32      Employee       Add Successful.
+        4           27481           Win Peterson           49      Employee
+                    378             Olivia  Carter         36      Manager
+                    6902            Marlene Hughes         24      Employee
+                    45426           Susanne Meier          47      Manager        Add Successful.
+        2           89              Sonia Katrine          25      Employee
+                    -134            Benjamin Chew          52      Employee       Add Unsuccessful, due to Invalid ID.
+        9           92              Daniel Travertine      29      Employee   
+                    35              Hazer Beige            29      Employee
+                    432             Granite Miles          41      Employee
+                    9080            Connor Gray            28      Manger
+                    67561           Jae Li                 31      Manager
+                    893             Boyce Avenue           50      Employee
+                    66              Shawn Malone           44      Employee
+                    3333            Noah Cyrus             63      Employee
+                    456540          Eric Hancock           60      Manger         Add Successful.
+
+
+
+Test Cases for "Display the employee information" function
+Test Description: All employee information in the system will be displayed.
+
+Steps to be Executed: 1. Choose number 2 as next step
+                      2. All the staffs' information will be displayed
+
+Staff Number            Name             Age     Job Title    
+1234               Joseph Shakespeare    32      Employee 
+27481              Win Peterson          49      Employee    
+378                Olivia  Carter        36      Manager
+6902               Marlene Hughes        24      Employee
+45426              Susanne Meier         47      Manager      
+89                 Sonia Katrine         25      Employee
+92                 Daniel Travertine     29      Employee
+35                 Hazer Beige           29      Employee
+432                Granite Miles         41      Employee
+9080               Connor Gray           28      Manager
+67561              Jae Li                31      Manager
+893                Boyce Avenue          50      Employee
+66                 Shawn Malone          44      Employee
+3333               Noah Cyrus            63      Employee
+456540             Eric Hancock          60      Manger
+
+
+                 
+Test Cases for "Delete the employee information" function
+Test Description: Specific employee information will be deleted.
+
+Steps to be Executed: 1. Choose number 3 as next step
+                      2. Enter the staff number of the staff to delete
+                      3. The staff information will be deleted
+
+Staff Number   Test Result
+45426          Delete Successfully.
+1212           Deletion failed, the staff could not be found.
+1              Deletion failed, the staff could not be found.
+27481          Delete Successfully.
+
+
+
+Test Cases for "Modify the employee information" function
+Test Description: Chosen employee information will be modified.
+
+Steps to be Executed: 1. Choose number 4 as next step
+                      2. Enter the staff number of staffs to modify
+                      3. Enter the modify information
+                      4. Enter new staff number
+                      5. Enter new staff name
+                      6. Enter new job title - 1.Employee/2.Manager
+                      7. The information has been modified successfully
+  
+Staff Number      New Staff Number       New Name        New Age     New Job Title      Test Results
+432                     43             Granite Meier       44           Manager      Modified successfully.
+22                      23             Micheal Johnson     57           Manger       Failed to find staff.
+89                      88             Sonia Katherine     29           Manager      Modified successfully.
+
+
+
+Test Cases for "Search the employee information" function
+Test Description: The employee information that searching for will be display.
+
+Steps to be Executed: 1. Choose number 5 as next step
+                      2. Select a query mode -1.staff number/2.staff name
+                      3. Enter the staff number if chose 1
+                      4. Enter the name of staff if chose 2
+                      5. The employee information is displayed
+
+Staff Number          Name              Age     Job Title      Test Results
+3333               Noah Cyrus           63      Employee       Search is successful.
+456540             Eric Hancock         60      Manger         Search is successful.
+882                Jaden Smith          22      Employee       Failed to search.
+88                 Sonia Katherine      29      Manager        Search is successful.
+2                  Sam Smith            34      Employee       Failed to search.
+
+
+
+Test Cases for "Sort by number" function
+Test Description: The employee ID will be arranged in ascending order.
+
+Steps to be Executed: 1. Choose number 6 as next step
+                      2. All staff number will be display in ascending order.
+test result: Sorting success
+Staff Number          Name              Age     Job Title  
+35                 Hazer Beige           29      Employee
+43                 Granite Meier         44      Manager
+66                 Shawn Malone          44      Employee
+88                 Sonia Katherine       29      Manager
+92                 Daniel Travertine     29      Employee
+378                Olivia  Carter        36      Manager
+893                Boyce Avenue          50      Employee
+1234               Joseph Shakespeare    32      Employee  
+3333               Noah Cyrus            63      Employee
+6902               Marlene Hughes        24      Employee    
+9080               Connor Gray           28      Manager
+67561              Jae Li                31      Manager
+456540             Eric Hancock          60      Manger
