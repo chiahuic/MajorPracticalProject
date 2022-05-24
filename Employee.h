@@ -5,7 +5,7 @@
 // general employee class
 class Employee : public Person {
  public:
-  Employee(int id, std::string name, int age);
+  Employee(int id, std::string name, int age, int D_id);
   virtual std::string getDepartName()
       override;  // override the worker class's function of the same name and
                  // get the department name of the employee
