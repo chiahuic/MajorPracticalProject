@@ -1,9 +1,9 @@
 #include "Management.h"
 
-#include <iostream>
 #include <algorithm>
-#include <cctype> // allowed to use isalpha
-#include <climits> // allowed to use INT_MAX
+#include <cctype>   // allowed to use isalpha
+#include <climits>  // allowed to use INT_MAX
+#include <iostream>
 
 Management::Management() {
   this->_StaffNumber = 0;    // initialized to zero
@@ -13,102 +13,109 @@ Management::Management() {
 void Management::ExitSystem() {
   std::cout << "Welcome to use system again" << std::endl;
 }
-
 void Management::Add_Staff() {
-  std::cout << "Please enter the number of staffs you want to add: " << std::endl;
+  std::cout << "Please enter the number of staffs you want to add: "
+            << std::endl;
   int addNum = 0;  // saves the amount entered by the user
   std::cin >> addNum;
   while (addNum <= 0 || addNum >= 50) {
     std::cout << "Invaild number. Please try again" << std::endl;
-    std::cout << "Please enter the number of staffs you want to add: " << std::endl;
-    std::cin.clear(); // clear error enter
-    std::cin.ignore(INT_MAX, '\n'); // INT_MAX means an extremely large number,'\n' means empty space
+    std::cout << "Please enter the number of staffs you want to add: "
+              << std::endl;
+    std::cin.clear();                // clear error enter
+    std::cin.ignore(INT_MAX, '\n');  // INT_MAX means an extremely large
+                                     // number,'\n' means empty space
     std::cin >> addNum;
   }
-  
-    int new_Size = this->_StaffNumber + addNum;  // The number of existing employees plus
-                                      // the number of new employees
-    Person** new_Space = new Person*[new_Size];  // Open up new space
-    if (this->_StaffArray !=
-        NULL)  // if the data of the original pointer is not null
+  int new_Size =
+      this->_StaffNumber + addNum;  // The number of existing employees plus
+                                    // the number of new employees
+  Person** new_Space = new Person*[new_Size];  // Open up new space
+  if (this->_StaffArray !=
+      NULL)  // if the data of the original pointer is not null
+  {
+    for (int i = 0; i < this->_StaffNumber;
+         i++)  // data of the original pointer is added to the new pointer
     {
-      for (int i = 0; i < this->_StaffNumber;
-           i++)  // data of the original pointer is added to the new pointer
-      {
-        new_Space[i] = this->_StaffArray[i];
-      }
+      new_Space[i] = this->_StaffArray[i];
     }
-
-    for (int i = 0; i < addNum; i++) {
-      int ID;  // create an variable nameed id to store the staff number entered
-               // from users           
-      std::cout << "Please enter pure and positive number as the staff number of " << i + 1 << " staff: " << std::endl;
-      std::cin >> ID;
-      while (ID <= 0) {
-        std::cout << "Invalid staff number, please enter again: " << std::endl;
-        std::cin.clear(); 
-        std::cin.ignore(INT_MAX, '\n'); 
-        std::cin >> ID;
-      }
-      std::string NAME;  // create an variable nameed id to store the staff
-                         // number entered from users
-      std::cout << "Please enter the name: " << std::endl;
-      // std::cin >> NAME;
-      while (std::getline(std::cin, NAME)) {
-        if (NAME.length() == 0)
-        {
-            std::cout << "Your input is not correct. Please re-enter your name" << std::endl;
-        }
-
-        // This will check if the NAME contains only characters.
-        else if (std::all_of(NAME.begin(), NAME.end(), isalpha)) // isalpha: The function returns a non-zero value if the argument is an alphabetic character, or zero otherwise.
-        {
-            break;
-        }
-        else {
-            std::cout << "Only characters are allowed:" << std::endl;
-        }
-    }
-      int AGE;
-      std::cout << "Please enter the age: " << std::endl;
-      std::cin >> AGE;
-      while (AGE <= 0 && AGE >= 150) {
-        std::cout << "Invalid number, please enter again: " << std::endl;
-        std::cin.clear(); 
-        std::cin.ignore(INT_MAX, '\n');
-        std::cin >> AGE;
-      }
-      int Select;
-      std::cout << "Please choose job title(enter 1 or 2)" << std::endl;
-      std::cout << "1. Employee" << std::endl;
-      std::cout << "2. Manager" << std::endl;
-      std::cin >> Select;
-      while (Select > 2 && Select < 1) {
-        std::cout << "Invalid number, choose 1 or 2 please" << std::endl;
-        std::cin.clear(); 
-        std::cin.ignore(INT_MAX, '\n');
-        std::cin >> Select;
-      }
-      Person* staff = NULL;
-      switch (Select) {
-        case 1:
-          staff = new Employee(ID, NAME, AGE);
-          break;
-        case 2:
-          staff = new Manager(ID, NAME, AGE);
-          break;
-        default:
-          std::cout << "Error choosen" << std::endl;
-          break;
-      }
-      new_Space[this->_StaffNumber + i] = staff;
-    }
-
-    delete[] this->_StaffArray;     // delete the initial array
-    this->_StaffArray = new_Space;  // update a new array
-    this->_StaffNumber = new_Size;  // update the current number of staffs
-    std::cout << "Add successful" << std::endl;
   }
+  for (int i = 0; i < addNum; i++) {
+    int ID;
+    std::cin.ignore(INT_MAX, '\n');
+    std::cout << "Please enter pure and positive number as the staff number of "
+              << i + 1 << " staff: " << std::endl;
+    std::cin >> ID;
+    while (ID <= 0 || ID > 5000) {
+      std::cout << "Invalid staff number, please enter again: " << std::endl;
+      std::cin.clear();
+      std::cin.ignore(INT_MAX, '\n');
+      std::cin >> ID;
+    }
+    std::string NAME;
+    std::cin.ignore(INT_MAX, '\n');
+    std::cout << "Please enter the name: " << std::endl;
+    while (std::getline(std::cin, NAME)) {
+      if (NAME.length() == 0) {
+        std::cout << "Your input is not correct. Please re-enter your name"
+                  << std::endl;
+      }
+
+      // This will check if the NAME contains only characters.
+      else if (std::all_of(
+                   NAME.begin(), NAME.end(),
+                   isalpha))  // isalpha: The function returns a non-zero value
+                              // if the argument is an alphabetic character, or
+                              // zero otherwise.
+      {
+        break;
+      } else {
+        std::cout << "Only characters are allowed:" << std::endl;
+      }
+    }
+    int AGE;
+    std::cin.ignore(INT_MAX, '\n');
+    std::cout << "Please enter the age: " << std::endl;
+    std::cin >> AGE;
+    while (AGE <= 0 || AGE >= 150) {
+      std::cout << "Invalid number, please enter again: " << std::endl;
+      std::cin.clear();
+      std::cin.ignore(INT_MAX, '\n');
+      std::cin >> AGE;
+    }
+    int Select;
+    std::cin.ignore(INT_MAX, '\n');
+    std::cout << "Please choose job title(enter 1 or 2)" << std::endl;
+    std::cout << "1. Employee" << std::endl;
+    std::cout << "2. Manager" << std::endl;
+    std::cin >> Select;
+    while (Select > 2 || Select < 1) {
+      std::cout << "Invalid number, choose 1 or 2 please" << std::endl;
+      std::cin.clear();
+      std::cin.ignore(INT_MAX, '\n');
+      std::cin >> Select;
+    }
+    Person* staff = NULL;
+    switch (Select) {
+      case 1:
+        staff = new Employee(ID, NAME, AGE);
+        break;
+      case 2:
+        staff = new Manager(ID, NAME, AGE);
+        break;
+      default:
+        std::cout << "Error choosen" << std::endl;
+        break;
+    }
+    new_Space[this->_StaffNumber + i] = staff;
+  }
+
+  delete[] this->_StaffArray;     // delete the initial array
+  this->_StaffArray = new_Space;  // update a new array
+  this->_StaffNumber = new_Size;  // update the current number of staffs
+  std::cout << "Add successful" << std::endl;
+}
+
 void Management::Display_Staff() {
   std::cout << "====================================" << std::endl;
   if (_StaffArray != NULL) {
@@ -117,12 +124,12 @@ void Management::Display_Staff() {
       this->_StaffArray[i]->showInformation();
     }
     std::cout << "====================================" << std::endl;
-  }
-  else{
+  } else {
     std::cout << "There are no any current staffs in the system" << std::endl;
     std::cout << "====================================" << std::endl;
   }
 }
+
 int Management::IsExist1(int id) {
   int index = -1;
   for (int i = 0; i < _StaffNumber; i++) {
@@ -151,7 +158,7 @@ void Management::Delete_Staff() {
 
   if (index_check != -1) {  // it means the staff exist, and need delete
     delete this->_StaffArray[index_check];
-    Person** new_persons = new Person*[_StaffNumber-1];
+    Person** new_persons = new Person*[_StaffNumber - 1];
     for (int i = index_check; i < _StaffNumber - 1; i++) {
       std::cout << "Delete successfully" << std::endl;
       new_persons[i] = this->_StaffArray[i + 1];
@@ -165,15 +172,17 @@ void Management::Delete_Staff() {
 }
 
 void Management::Modify_Staff() {
-  std::cout << "Please enter the staff number of the employee whose information you "
-               "want to modify: "
-            << std::endl;
+  std::cout
+      << "Please enter the staff number of the employee whose information you "
+         "want to modify: "
+      << std::endl;
   int id = 0;
   std::cin >> id;
   int modify = this->IsExist1(id);
   if (modify != -1) {
     delete this->_StaffArray[modify];
-    std::cout << "Have found the staff that staff number is " << id << std::endl;
+    std::cout << "Have found the staff that staff number is " << id
+              << std::endl;
     std::cout << "Please enter the modified information" << std::endl;
     int new_id = 0;
     int new_select = 0;
@@ -191,23 +200,23 @@ void Management::Modify_Staff() {
     std::cin >> new_select;
     Person* person = NULL;
     switch (new_select) {
-        case 1:
-          person = new Employee(new_id, new_name, new_age);
-          break;
-        case 2:
-          person = new Manager(new_id, new_name, new_age);
-          break;
-        default:
-          std::cout << "Error choosen" << std::endl;
-          break;
-      }
-    // update new data  
+      case 1:
+        person = new Employee(new_id, new_name, new_age);
+        break;
+      case 2:
+        person = new Manager(new_id, new_name, new_age);
+        break;
+      default:
+        std::cout << "Error choosen" << std::endl;
+        break;
+    }
+    // update new data
     this->_StaffArray[modify] = person;
     std::cout << "The information has been modified successfully." << std::endl;
-    
-  }
-  else {
-    std::cout << "Failed to find staff who have staff number " << id << std::endl;
+
+  } else {
+    std::cout << "Failed to find staff who have staff number " << id
+              << std::endl;
   }
 }
 
@@ -262,8 +271,8 @@ void Management::Sort_Staff() {
         _StaffArray[i] = _StaffArray[min_max];
         _StaffArray[min_max] = temp;
       }
+      std::cout << "Sorting success" << std::endl;
     }
-    std::cout << "Sorting success" << std::endl;
   } else {
     std::cout << "Don't need to arrange" << std::endl;
   }
@@ -310,26 +319,30 @@ void Management::Run_System() {
         Display_Staff();
         break;
       case 3:
-        Delete_Staff();  // if choice is euqal to 3, the management should delete the information of employees
+        Delete_Staff();  // if choice is euqal to 3, the management should
+                         // delete the information of employees
         break;
       case 4:
-        Modify_Staff();  // if choice is euqal to 4, the management should modify theinformation of employees
+        Modify_Staff();  // if choice is euqal to 4, the management should
+                         // modify theinformation of employees
         break;
       case 5:
-        Search_Staff();  // if choice is euqal to 5, the management should search the information of staffs
+        Search_Staff();  // if choice is euqal to 5, the management should
+                         // search the information of staffs
         break;
       case 6:
-        Sort_Staff();  // if choice is euqal to 5, the management should sort by number
+        Sort_Staff();  // if choice is euqal to 5, the management should sort by
+                       // number
         break;
       default:
         std::cout << "Invalid number" << std::endl;
         // system("cls"); // Screen clearing operations
         break;
     }
-    if (choice == 0) { // if choice is euqal to zero, it doesn't need to show menu
+    if (choice ==
+        0) {  // if choice is euqal to zero, it doesn't need to show menu
       return;
-    }
-    else {
+    } else {
       Show_menu();
     }
   }
